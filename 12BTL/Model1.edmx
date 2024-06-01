@@ -1,0 +1,685 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="qlidaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DuAn">
+          <Key>
+            <PropertyRef Name="IDduan" />
+          </Key>
+          <Property Name="IDduan" Type="int" Nullable="false" />
+          <Property Name="Tenduan" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDnhadautu" Type="int" />
+          <Property Name="IDlichtrinh" Type="int" />
+          <Property Name="kinhphi" Type="int" />
+          <Property Name="IDkhachhang" Type="int" />
+          <Property Name="IDnhanvien" Type="int" />
+          <Property Name="IDhopdong" Type="int" />
+        </EntityType>
+        <EntityType Name="Hopdong">
+          <Key>
+            <PropertyRef Name="IDhopdong" />
+          </Key>
+          <Property Name="IDhopdong" Type="int" Nullable="false" />
+          <Property Name="Tenhophopdongduan" Type="nvarchar" MaxLength="50" />
+          <Property Name="ngaykiket" Type="datetime" />
+          <Property Name="hieuluc" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="IDKhachhang" />
+          </Key>
+          <Property Name="IDKhachhang" Type="int" Nullable="false" />
+          <Property Name="TenKhachhang" Type="nvarchar" MaxLength="50" />
+          <Property Name="Diachi" Type="nvarchar" MaxLength="50" />
+          <Property Name="SĐT" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Lichtrinh">
+          <Key>
+            <PropertyRef Name="IDlichtrinh" />
+          </Key>
+          <Property Name="IDlichtrinh" Type="int" Nullable="false" />
+          <Property Name="Tenduan" Type="nvarchar" MaxLength="50" />
+          <Property Name="ngaybatdau" Type="datetime" />
+          <Property Name="ngạketthuc" Type="datetime" />
+          <Property Name="IDthongbao" Type="int" />
+        </EntityType>
+        <EntityType Name="Nhadautu">
+          <Key>
+            <PropertyRef Name="IDnhadautu" />
+          </Key>
+          <Property Name="IDnhadautu" Type="int" Nullable="false" />
+          <Property Name="Tennhadautu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sđt" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Nhanvien">
+          <Key>
+            <PropertyRef Name="IDnhanvien" />
+          </Key>
+          <Property Name="IDnhanvien" Type="int" Nullable="false" />
+          <Property Name="tennhanvien" Type="nvarchar" MaxLength="50" />
+          <Property Name="SĐT" Type="nchar" MaxLength="50" />
+          <Property Name="IDPhongban" Type="int" />
+        </EntityType>
+        <EntityType Name="Phongban">
+          <Key>
+            <PropertyRef Name="IDphongban" />
+          </Key>
+          <Property Name="IDphongban" Type="int" Nullable="false" />
+          <Property Name="manhanvien" Type="int" />
+          <Property Name="tenphongban" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Taikhoan">
+          <Key>
+            <PropertyRef Name="TenTk" />
+          </Key>
+          <Property Name="TenTk" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Matkhau" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sđt" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Thongbao">
+          <Key>
+            <PropertyRef Name="IDthongbao" />
+          </Key>
+          <Property Name="IDthongbao" Type="int" Nullable="false" />
+          <Property Name="Tenthongbao" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ngaythongbao" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_DuAn_Hopdong">
+          <End Role="Hopdong" Type="Self.Hopdong" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hopdong">
+              <PropertyRef Name="IDhopdong" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDhopdong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DuAn_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachhang" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDkhachhang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DuAn_Lichtrinh">
+          <End Role="Lichtrinh" Type="Self.Lichtrinh" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lichtrinh">
+              <PropertyRef Name="IDlichtrinh" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDlichtrinh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DuAn_Nhadautu">
+          <End Role="Nhadautu" Type="Self.Nhadautu" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nhadautu">
+              <PropertyRef Name="IDnhadautu" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDnhadautu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DuAn_Nhanvien">
+          <End Role="Nhanvien" Type="Self.Nhanvien" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nhanvien">
+              <PropertyRef Name="IDnhanvien" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDnhanvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lichtrinh_Thongbao">
+          <End Role="Thongbao" Type="Self.Thongbao" Multiplicity="0..1" />
+          <End Role="Lichtrinh" Type="Self.Lichtrinh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thongbao">
+              <PropertyRef Name="IDthongbao" />
+            </Principal>
+            <Dependent Role="Lichtrinh">
+              <PropertyRef Name="IDthongbao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nhanvien_Phongban">
+          <End Role="Phongban" Type="Self.Phongban" Multiplicity="0..1" />
+          <End Role="Nhanvien" Type="Self.Nhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phongban">
+              <PropertyRef Name="IDphongban" />
+            </Principal>
+            <Dependent Role="Nhanvien">
+              <PropertyRef Name="IDPhongban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="qlidaModelStoreContainer">
+          <EntitySet Name="DuAn" EntityType="Self.DuAn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hopdong" EntityType="Self.Hopdong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lichtrinh" EntityType="Self.Lichtrinh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nhadautu" EntityType="Self.Nhadautu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nhanvien" EntityType="Self.Nhanvien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phongban" EntityType="Self.Phongban" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taikhoan" EntityType="Self.Taikhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Thongbao" EntityType="Self.Thongbao" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DuAn_Hopdong" Association="Self.FK_DuAn_Hopdong">
+            <End Role="Hopdong" EntitySet="Hopdong" />
+            <End Role="DuAn" EntitySet="DuAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DuAn_KhachHang" Association="Self.FK_DuAn_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="DuAn" EntitySet="DuAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DuAn_Lichtrinh" Association="Self.FK_DuAn_Lichtrinh">
+            <End Role="Lichtrinh" EntitySet="Lichtrinh" />
+            <End Role="DuAn" EntitySet="DuAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DuAn_Nhadautu" Association="Self.FK_DuAn_Nhadautu">
+            <End Role="Nhadautu" EntitySet="Nhadautu" />
+            <End Role="DuAn" EntitySet="DuAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DuAn_Nhanvien" Association="Self.FK_DuAn_Nhanvien">
+            <End Role="Nhanvien" EntitySet="Nhanvien" />
+            <End Role="DuAn" EntitySet="DuAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lichtrinh_Thongbao" Association="Self.FK_Lichtrinh_Thongbao">
+            <End Role="Thongbao" EntitySet="Thongbao" />
+            <End Role="Lichtrinh" EntitySet="Lichtrinh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nhanvien_Phongban" Association="Self.FK_Nhanvien_Phongban">
+            <End Role="Phongban" EntitySet="Phongban" />
+            <End Role="Nhanvien" EntitySet="Nhanvien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="qlidaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DuAn">
+          <Key>
+            <PropertyRef Name="IDduan" />
+          </Key>
+          <Property Name="IDduan" Type="Int32" Nullable="false" />
+          <Property Name="Tenduan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDnhadautu" Type="Int32" />
+          <Property Name="IDlichtrinh" Type="Int32" />
+          <Property Name="kinhphi" Type="Int32" />
+          <Property Name="IDkhachhang" Type="Int32" />
+          <Property Name="IDnhanvien" Type="Int32" />
+          <Property Name="IDhopdong" Type="Int32" />
+          <NavigationProperty Name="Hopdong" Relationship="Self.FK_DuAn_Hopdong" FromRole="DuAn" ToRole="Hopdong" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK_DuAn_KhachHang" FromRole="DuAn" ToRole="KhachHang" />
+          <NavigationProperty Name="Lichtrinh" Relationship="Self.FK_DuAn_Lichtrinh" FromRole="DuAn" ToRole="Lichtrinh" />
+          <NavigationProperty Name="Nhadautu" Relationship="Self.FK_DuAn_Nhadautu" FromRole="DuAn" ToRole="Nhadautu" />
+          <NavigationProperty Name="Nhanvien" Relationship="Self.FK_DuAn_Nhanvien" FromRole="DuAn" ToRole="Nhanvien" />
+        </EntityType>
+        <EntityType Name="Hopdong">
+          <Key>
+            <PropertyRef Name="IDhopdong" />
+          </Key>
+          <Property Name="IDhopdong" Type="Int32" Nullable="false" />
+          <Property Name="Tenhophopdongduan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ngaykiket" Type="DateTime" Precision="3" />
+          <Property Name="hieuluc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="DuAns" Relationship="Self.FK_DuAn_Hopdong" FromRole="Hopdong" ToRole="DuAn" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="IDKhachhang" />
+          </Key>
+          <Property Name="IDKhachhang" Type="Int32" Nullable="false" />
+          <Property Name="TenKhachhang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Diachi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SĐT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DuAns" Relationship="Self.FK_DuAn_KhachHang" FromRole="KhachHang" ToRole="DuAn" />
+        </EntityType>
+        <EntityType Name="Lichtrinh">
+          <Key>
+            <PropertyRef Name="IDlichtrinh" />
+          </Key>
+          <Property Name="IDlichtrinh" Type="Int32" Nullable="false" />
+          <Property Name="Tenduan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ngaybatdau" Type="DateTime" Precision="3" />
+          <Property Name="ngạketthuc" Type="DateTime" Precision="3" />
+          <Property Name="IDthongbao" Type="Int32" />
+          <NavigationProperty Name="DuAns" Relationship="Self.FK_DuAn_Lichtrinh" FromRole="Lichtrinh" ToRole="DuAn" />
+          <NavigationProperty Name="Thongbao" Relationship="Self.FK_Lichtrinh_Thongbao" FromRole="Lichtrinh" ToRole="Thongbao" />
+        </EntityType>
+        <EntityType Name="Nhadautu">
+          <Key>
+            <PropertyRef Name="IDnhadautu" />
+          </Key>
+          <Property Name="IDnhadautu" Type="Int32" Nullable="false" />
+          <Property Name="Tennhadautu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sđt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DuAns" Relationship="Self.FK_DuAn_Nhadautu" FromRole="Nhadautu" ToRole="DuAn" />
+        </EntityType>
+        <EntityType Name="Nhanvien">
+          <Key>
+            <PropertyRef Name="IDnhanvien" />
+          </Key>
+          <Property Name="IDnhanvien" Type="Int32" Nullable="false" />
+          <Property Name="tennhanvien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SĐT" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="IDPhongban" Type="Int32" />
+          <NavigationProperty Name="DuAns" Relationship="Self.FK_DuAn_Nhanvien" FromRole="Nhanvien" ToRole="DuAn" />
+          <NavigationProperty Name="Phongban" Relationship="Self.FK_Nhanvien_Phongban" FromRole="Nhanvien" ToRole="Phongban" />
+        </EntityType>
+        <EntityType Name="Phongban">
+          <Key>
+            <PropertyRef Name="IDphongban" />
+          </Key>
+          <Property Name="IDphongban" Type="Int32" Nullable="false" />
+          <Property Name="manhanvien" Type="Int32" />
+          <NavigationProperty Name="Nhanviens" Relationship="Self.FK_Nhanvien_Phongban" FromRole="Phongban" ToRole="Nhanvien" />
+          <Property Name="tenphongban" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Taikhoan">
+          <Key>
+            <PropertyRef Name="TenTk" />
+          </Key>
+          <Property Name="TenTk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Matkhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sđt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Thongbao">
+          <Key>
+            <PropertyRef Name="IDthongbao" />
+          </Key>
+          <Property Name="IDthongbao" Type="Int32" Nullable="false" />
+          <Property Name="Tenthongbao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ngaythongbao" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Lichtrinhs" Relationship="Self.FK_Lichtrinh_Thongbao" FromRole="Thongbao" ToRole="Lichtrinh" />
+        </EntityType>
+        <Association Name="FK_DuAn_Hopdong">
+          <End Role="Hopdong" Type="Self.Hopdong" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hopdong">
+              <PropertyRef Name="IDhopdong" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDhopdong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DuAn_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachhang" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDkhachhang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DuAn_Lichtrinh">
+          <End Role="Lichtrinh" Type="Self.Lichtrinh" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lichtrinh">
+              <PropertyRef Name="IDlichtrinh" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDlichtrinh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DuAn_Nhadautu">
+          <End Role="Nhadautu" Type="Self.Nhadautu" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nhadautu">
+              <PropertyRef Name="IDnhadautu" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDnhadautu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DuAn_Nhanvien">
+          <End Role="Nhanvien" Type="Self.Nhanvien" Multiplicity="0..1" />
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nhanvien">
+              <PropertyRef Name="IDnhanvien" />
+            </Principal>
+            <Dependent Role="DuAn">
+              <PropertyRef Name="IDnhanvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lichtrinh_Thongbao">
+          <End Role="Thongbao" Type="Self.Thongbao" Multiplicity="0..1" />
+          <End Role="Lichtrinh" Type="Self.Lichtrinh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thongbao">
+              <PropertyRef Name="IDthongbao" />
+            </Principal>
+            <Dependent Role="Lichtrinh">
+              <PropertyRef Name="IDthongbao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nhanvien_Phongban">
+          <End Role="Phongban" Type="Self.Phongban" Multiplicity="0..1" />
+          <End Role="Nhanvien" Type="Self.Nhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phongban">
+              <PropertyRef Name="IDphongban" />
+            </Principal>
+            <Dependent Role="Nhanvien">
+              <PropertyRef Name="IDPhongban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Data" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DuAns" EntityType="Self.DuAn" />
+          <EntitySet Name="Hopdongs" EntityType="Self.Hopdong" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+          <EntitySet Name="Lichtrinhs" EntityType="Self.Lichtrinh" />
+          <EntitySet Name="Nhadautus" EntityType="Self.Nhadautu" />
+          <EntitySet Name="Nhanviens" EntityType="Self.Nhanvien" />
+          <EntitySet Name="Phongbans" EntityType="Self.Phongban" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Taikhoans" EntityType="Self.Taikhoan" />
+          <EntitySet Name="Thongbaos" EntityType="Self.Thongbao" />
+          <AssociationSet Name="FK_DuAn_Hopdong" Association="Self.FK_DuAn_Hopdong">
+            <End Role="Hopdong" EntitySet="Hopdongs" />
+            <End Role="DuAn" EntitySet="DuAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DuAn_KhachHang" Association="Self.FK_DuAn_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="DuAn" EntitySet="DuAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DuAn_Lichtrinh" Association="Self.FK_DuAn_Lichtrinh">
+            <End Role="Lichtrinh" EntitySet="Lichtrinhs" />
+            <End Role="DuAn" EntitySet="DuAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DuAn_Nhadautu" Association="Self.FK_DuAn_Nhadautu">
+            <End Role="Nhadautu" EntitySet="Nhadautus" />
+            <End Role="DuAn" EntitySet="DuAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DuAn_Nhanvien" Association="Self.FK_DuAn_Nhanvien">
+            <End Role="Nhanvien" EntitySet="Nhanviens" />
+            <End Role="DuAn" EntitySet="DuAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lichtrinh_Thongbao" Association="Self.FK_Lichtrinh_Thongbao">
+            <End Role="Thongbao" EntitySet="Thongbaos" />
+            <End Role="Lichtrinh" EntitySet="Lichtrinhs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nhanvien_Phongban" Association="Self.FK_Nhanvien_Phongban">
+            <End Role="Phongban" EntitySet="Phongbans" />
+            <End Role="Nhanvien" EntitySet="Nhanviens" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(qlidaModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(qlidaModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="qlidaModelStoreContainer" CdmEntityContainer="Data">
+          <EntitySetMapping Name="DuAns">
+            <EntityTypeMapping TypeName="qlidaModel.DuAn">
+              <MappingFragment StoreEntitySet="DuAn">
+                <ScalarProperty Name="IDduan" ColumnName="IDduan" />
+                <ScalarProperty Name="Tenduan" ColumnName="Tenduan" />
+                <ScalarProperty Name="IDnhadautu" ColumnName="IDnhadautu" />
+                <ScalarProperty Name="IDlichtrinh" ColumnName="IDlichtrinh" />
+                <ScalarProperty Name="kinhphi" ColumnName="kinhphi" />
+                <ScalarProperty Name="IDkhachhang" ColumnName="IDkhachhang" />
+                <ScalarProperty Name="IDnhanvien" ColumnName="IDnhanvien" />
+                <ScalarProperty Name="IDhopdong" ColumnName="IDhopdong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hopdongs">
+            <EntityTypeMapping TypeName="qlidaModel.Hopdong">
+              <MappingFragment StoreEntitySet="Hopdong">
+                <ScalarProperty Name="IDhopdong" ColumnName="IDhopdong" />
+                <ScalarProperty Name="Tenhophopdongduan" ColumnName="Tenhophopdongduan" />
+                <ScalarProperty Name="ngaykiket" ColumnName="ngaykiket" />
+                <ScalarProperty Name="hieuluc" ColumnName="hieuluc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="qlidaModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="IDKhachhang" ColumnName="IDKhachhang" />
+                <ScalarProperty Name="TenKhachhang" ColumnName="TenKhachhang" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="SĐT" ColumnName="SĐT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lichtrinhs">
+            <EntityTypeMapping TypeName="qlidaModel.Lichtrinh">
+              <MappingFragment StoreEntitySet="Lichtrinh">
+                <ScalarProperty Name="IDlichtrinh" ColumnName="IDlichtrinh" />
+                <ScalarProperty Name="Tenduan" ColumnName="Tenduan" />
+                <ScalarProperty Name="ngaybatdau" ColumnName="ngaybatdau" />
+                <ScalarProperty Name="ngạketthuc" ColumnName="ngạketthuc" />
+                <ScalarProperty Name="IDthongbao" ColumnName="IDthongbao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nhadautus">
+            <EntityTypeMapping TypeName="qlidaModel.Nhadautu">
+              <MappingFragment StoreEntitySet="Nhadautu">
+                <ScalarProperty Name="IDnhadautu" ColumnName="IDnhadautu" />
+                <ScalarProperty Name="Tennhadautu" ColumnName="Tennhadautu" />
+                <ScalarProperty Name="Sđt" ColumnName="Sđt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nhanviens">
+            <EntityTypeMapping TypeName="qlidaModel.Nhanvien">
+              <MappingFragment StoreEntitySet="Nhanvien">
+                <ScalarProperty Name="IDnhanvien" ColumnName="IDnhanvien" />
+                <ScalarProperty Name="tennhanvien" ColumnName="tennhanvien" />
+                <ScalarProperty Name="SĐT" ColumnName="SĐT" />
+                <ScalarProperty Name="IDPhongban" ColumnName="IDPhongban" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phongbans">
+            <EntityTypeMapping TypeName="qlidaModel.Phongban">
+              <MappingFragment StoreEntitySet="Phongban">
+                <ScalarProperty Name="tenphongban" ColumnName="tenphongban" />
+                <ScalarProperty Name="IDphongban" ColumnName="IDphongban" />
+                <ScalarProperty Name="manhanvien" ColumnName="manhanvien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="qlidaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taikhoans">
+            <EntityTypeMapping TypeName="qlidaModel.Taikhoan">
+              <MappingFragment StoreEntitySet="Taikhoan">
+                <ScalarProperty Name="TenTk" ColumnName="TenTk" />
+                <ScalarProperty Name="Matkhau" ColumnName="Matkhau" />
+                <ScalarProperty Name="Sđt" ColumnName="Sđt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Thongbaos">
+            <EntityTypeMapping TypeName="qlidaModel.Thongbao">
+              <MappingFragment StoreEntitySet="Thongbao">
+                <ScalarProperty Name="IDthongbao" ColumnName="IDthongbao" />
+                <ScalarProperty Name="Tenthongbao" ColumnName="Tenthongbao" />
+                <ScalarProperty Name="Ngaythongbao" ColumnName="Ngaythongbao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="qlidaModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="qlidaModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="qlidaModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="qlidaModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qlidaModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="qlidaModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qlidaModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="qlidaModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="qlidaModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

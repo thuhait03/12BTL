@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="266bcf3820fa4efc954783782165363b" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="qlidaModel.DuAn" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.Hopdong" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.KhachHang" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.Lichtrinh" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.Nhadautu" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.Nhanvien" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.Phongban" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.Taikhoan" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlidaModel.Thongbao" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="qlidaModel.FK_DuAn_Hopdong" ManuallyRouted="false" />
+        <AssociationConnector Association="qlidaModel.FK_DuAn_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="qlidaModel.FK_DuAn_Lichtrinh" ManuallyRouted="false" />
+        <AssociationConnector Association="qlidaModel.FK_DuAn_Nhadautu" ManuallyRouted="false" />
+        <AssociationConnector Association="qlidaModel.FK_DuAn_Nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="qlidaModel.FK_Lichtrinh_Thongbao" ManuallyRouted="false" />
+        <AssociationConnector Association="qlidaModel.FK_Nhanvien_Phongban" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
